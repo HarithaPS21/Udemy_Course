@@ -118,8 +118,18 @@ function init() {
 
 init();
 
-
 // Primitive vs Reference values
 let userMessage = "Hello";
 
+// DOM manipulation
+const container = document.getElementById("button-container");
+// event delegation
+container.addEventListener("click", (event) => {
+  if (event.target.classList.contains("btn")) {
+    alert(`${event.target.textContent} clicked`);
+  }
+});
+
+const btns = document.querySelectorAll(".btn");
+console.log("btns = ",btns);
 
