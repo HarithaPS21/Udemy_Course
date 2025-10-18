@@ -9,12 +9,12 @@ function App() {
 
   const [selectedTabContent, setSelectedTabContent] = useState();
   
-  const handleSelect = (selectedButton) => {
-    console.log(selectedButton);
+  const handleSelect = (selectedTopic) => {
+    console.log(selectedTopic);
     // tabContent variable updation will not trigger a rerender of the component.
-    tabContent = selectedButton;
+    tabContent = selectedTopic;
     // Hence replace it with a state variable, selectedTabContent
-    setSelectedTabContent(EXAMPLES[selectedButton]);
+    setSelectedTabContent(EXAMPLES[selectedTopic]);
     console.log(selectedTabContent); // will not see the latest value here, because the state updation is only scheduled by React.
   };
   console.log(selectedTabContent); // here, we will get the latest value
