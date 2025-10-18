@@ -6,10 +6,9 @@ import { CORE_CONCEPTS, EXAMPLES } from "./utils/data.js";
 
 function App() {
   let tabContent = "Please click on a button";
+
+  const [selectedTabContent, setSelectedTabContent] = useState();
   
-  const [selectedTabContent, setSelectedTabContent] = useState(
-    EXAMPLES["components"]
-  );
   const handleSelect = (selectedButton) => {
     console.log(selectedButton);
     // tabContent variable updation will not trigger a rerender of the component.
@@ -47,14 +46,17 @@ function App() {
             <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
             <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
           </menu>
-          <div className="tab-content">
-            {/* {tabContent} */}
-            <h3>{selectedTabContent.title}</h3>
-            <p>{selectedTabContent.description}</p>
-            <pre>
-              <code>{selectedTabContent.code}</code>
-            </pre>
-          </div>
+          {!selectedTabContent && <p>Please select a topic.</p>}
+          {selectedTabContent && (
+            <div className="tab-content">
+              {/* {tabContent} */}
+              <h3>{selectedTabContent.title}</h3>
+              <p>{selectedTabContent.description}</p>
+              <pre>
+                <code>{selectedTabContent.code}</code>
+              </pre>
+            </div>
+          )}
         </section>
       </main>
     </div>
