@@ -60,6 +60,10 @@ function App() {
     });
   };
 
+  const handleRematch = () => {
+    setGameTurns([]);
+  };
+
   return (
     <main>
       <div id="game-container">
@@ -68,7 +72,9 @@ function App() {
           <Player name="Player1" symbol="X" isActive={activePlayer === "X"} />
           <Player name="Player2" symbol="O" isActive={activePlayer === "O"} />
         </ol>
-        {(winner || hasDraw) && <GameOver winner={winner} />}
+        {(winner || hasDraw) && (
+          <GameOver winner={winner} onRestart={handleRematch} />
+        )}
         {/* Game Board */}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
