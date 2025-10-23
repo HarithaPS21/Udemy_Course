@@ -23,7 +23,9 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  let gameBoard = initialGameBoard;
+  // Deep clone the initial board to avoid mutating the original `initialGameBoard`.
+  // Using the spread operator fixes a bug where previous game state persisted across re-renders.
+  let gameBoard = [...initialGameBoard.map((innerArray) => [...innerArray])];
   for (const turn of gameTurns) {
     const { square, player } = turn;
     const { row, col } = square;
