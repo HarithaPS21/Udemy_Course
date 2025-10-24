@@ -3,55 +3,12 @@ import Player from "./components/Player";
 import GameOver from "./components/GameOver";
 import GameBoard from "./components/GameBoard";
 import Log from "./components/Log";
-import { WINNING_COMBINATIONS } from "./winning-combinations";
-
-const PLAYERS = { X: "Player1", O: "Player2" };
-
-const INITIAL_GAME_BOARD = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-function deriveActivePlayer(gameTurns) {
-  let currentPlayer = "X";
-  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
-    currentPlayer = "O";
-  }
-  return currentPlayer;
-}
-
-function deriveGameBoard(gameTurns) {
-  // Deep clone the initial board to avoid mutating the original `INITIAL_GAME_BOARD`.
-  // Using the spread operator fixes a bug where previous game state persisted across re-renders.
-  let gameBoard = [...INITIAL_GAME_BOARD.map((innerArray) => [...innerArray])];
-  for (const turn of gameTurns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    gameBoard[row][col] = player;
-  }
-  return gameBoard;
-}
-
-function deriveWinner(gameBoard, players) {
-  let winner = null;
-  for (const combination of WINNING_COMBINATIONS) {
-    const firstSquareSymbol =
-      gameBoard[combination[0].row][combination[0].column];
-    const secondSquareSymbol =
-      gameBoard[combination[1].row][combination[1].column];
-    const thirdSquareSymbol =
-      gameBoard[combination[2].row][combination[2].column];
-    if (
-      firstSquareSymbol &&
-      firstSquareSymbol === secondSquareSymbol &&
-      firstSquareSymbol === thirdSquareSymbol
-    ) {
-      winner = players[firstSquareSymbol];
-    }
-  }
-  return winner;
-}
+import { PLAYERS } from "./utils/constants";
+import {
+  deriveActivePlayer,
+  deriveGameBoard,
+  deriveWinner,
+} from "./utils/helpers";
 
 function App() {
   const [players, setPlayers] = useState(PLAYERS);
