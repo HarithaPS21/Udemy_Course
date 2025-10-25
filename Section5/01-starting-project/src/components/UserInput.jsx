@@ -1,19 +1,4 @@
-import { useState } from "react";
-
-function UserInput() {
-  const [userInput, setUserInput] = useState({
-    initialInvestment: 10000,
-    annualInvestment: 1200,
-    expectedReturn: 6,
-    duration: 10,
-  });
-
-  const handleInputChange = (inputId, newValue) => {
-    setUserInput((prevInput) => {
-      return { ...prevInput, [inputId]: newValue };
-    });
-  };
-
+function UserInput({ userInput, onInputChange }) {
   return (
     <section id="user-input">
       <div className="input-group">
@@ -24,7 +9,7 @@ function UserInput() {
             id="initialInvestment"
             value={userInput.initialInvestment}
             onChange={(event) =>
-              handleInputChange(event.target.id, event.target.value)
+              onInputChange(event.target.id, event.target.value)
             }
             required
           />
@@ -36,7 +21,7 @@ function UserInput() {
             id="annualInvestment"
             value={userInput.annualInvestment}
             onChange={(event) =>
-              handleInputChange(event.target.id, event.target.value)
+              onInputChange(event.target.id, event.target.value)
             }
             required
           />
@@ -50,7 +35,7 @@ function UserInput() {
             id="expectedReturn"
             value={userInput.expectedReturn}
             onChange={(event) =>
-              handleInputChange(event.target.id, event.target.value)
+              onInputChange(event.target.id, event.target.value)
             }
             required
           />
@@ -62,9 +47,10 @@ function UserInput() {
             id="duration"
             value={userInput.duration}
             onChange={(event) =>
-              handleInputChange(event.target.id, event.target.value)
+              onInputChange(event.target.id, event.target.value)
             }
             required
+            min={1}
           />
         </p>
       </div>
